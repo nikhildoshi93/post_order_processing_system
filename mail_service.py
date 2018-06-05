@@ -19,7 +19,7 @@ from .config import get_config
 
 # Extracting the service endpoints from config
 # Meant to be pulled from or managed by API gateway
-order_info_service = get_config('order_info_service_endpoint')
+order_info_service = get_config('order_info_service_endpoint') # Endpoint to update mail notification status
 mailer = get_config('mailer_endpoint')
 
 # Message Queue using the process and thread-safe Queue() impl
