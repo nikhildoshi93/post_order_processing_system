@@ -18,6 +18,7 @@ from .config import get_config
 
 # Extracting the service endpoints from config
 # Meant to be pulled from or managed by API gateway
+# Endpoint to update mail notification status, different from mail_service endpoint
 notification_status_endpoint = get_config('notification_status_endpoint')
 order_info_service = get_config('order_info_service_endpoint')
 

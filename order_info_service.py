@@ -73,3 +73,72 @@ def notification_status_POST_(request):
 		notification_obj.save()
 
 
+def update_mail_status_POST_(request):
+	'''
+	POST API
+		request to update mail_status
+		Repsonse codes: 200, 300, 501
+	'''
+
+	# For simplicity's sake, making two calls from this API call
+	# 1. Get notification status packet, update the relevant information
+	# 2. Post the notification status packet
+
+	# Parse the order_id and status request
+	request_info = json.load(request.data)
+
+	order_id = request_info['order_id']
+	mail_status = request_info['status']
+
+	# Get the notification status packet
+	# Maybe create a new request with just the order id
+	response = notification_status_GET_(request)
+
+	# Parse the notification response
+	notification_info = json.load(response.data)
+	status = notification_info['status']
+
+	# Update the mail_status
+	status['mail_status'] = mail_status
+
+	# Create new request to post
+	request = make_request(order_id, status) # To create a request object
+
+	# Post the notification status
+	notification_status_POST_(request)
+
+
+# A bit of code duplication, can pluck out common code as functions
+def update_invoice_status_POST_(request):
+	'''
+	POST API
+		request to update invoice_status
+		Repsonse codes: 200, 300, 501
+	'''
+
+	# For simplicity's sake, making two calls from this API call
+	# 1. Get notification status packet, update the relevant information
+	# 2. Post the notification status packet
+
+	# Parse the order_id and status request
+	request_info = json.load(request.data)
+
+	order_id = request_info['order_id']
+	invoice_status = request_info['status']
+
+	# Get the notification status packet
+	# Maybe create a new request with just the order id
+	response = notification_status_GET_(request)
+
+	# Parse the notification response
+	notification_info = json.load(response.data)
+	status = notification_info['status']
+
+	# Update the mail_status
+	status['invoice_status'] = invoice_status
+
+	# Create new request to post
+	request = make_request(order_id, status) # To create a request object
+
+	# Post the notification status
+	notification_status_POST_(request)
